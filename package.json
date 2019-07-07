@@ -11,7 +11,7 @@
     "bluebird": "^3.5.1",
     "chalk": "^2.4.1",
     "cnpm": "^6.1.0",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.11",
     "node-fetch": "^2.6.0",
     "ts-node": "^7.0.0",
     "typescript": "^3.0.1"
