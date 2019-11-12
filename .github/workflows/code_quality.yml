@@ -1,4 +1,4 @@
-name: Node CI
+name: Code quality
 
 on: [push, pull_request]
 
@@ -13,7 +13,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '12.x'
-    - name: npm install, build, and test
+    - name: yarn install and quality check
       run: |
         yarn install --frozen-lockfile
         yarn lint
