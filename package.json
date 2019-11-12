@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.29",
-    "@types/lodash": "^4.14.138",
+    "@types/lodash": "^4.14.146",
     "@types/node": "^12.12.7",
     "@types/node-fetch": "^2.5.0",
     "prettier": "^1.19.1",
