@@ -20,17 +20,21 @@
     "@types/lodash": "^4.14.146",
     "@types/node": "^12.12.7",
     "@types/node-fetch": "^2.5.3",
+    "@typescript-eslint/eslint-plugin": "^2.7.0",
+    "@typescript-eslint/parser": "^2.7.0",
     "builtin-modules": "^3.1.0",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.1",
     "prettier": "^1.19.1",
     "rollup": "^1.26.5",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^5.1.2",
     "rollup-plugin-typescript": "^1.0.1",
-    "tslib": "^1.10.0",
-    "tslint": "^5.20.1",
-    "tslint-config-prettier": "^1.18.0",
-    "tslint-plugin-prettier": "^2.0.1"
+    "tslib": "^1.10.0"
   },
   "scripts": {
     "build": "rollup -c rollup.config.js"

@@ -4,7 +4,7 @@ import builtins from 'builtin-modules'
 import commonjs from 'rollup-plugin-commonjs'
 import { terser } from 'rollup-plugin-terser'
 
-export default  {
+export default {
   input: './index.ts',
   plugins: [
     typescript(),
