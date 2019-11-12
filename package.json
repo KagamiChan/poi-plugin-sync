@@ -10,7 +10,6 @@
   "dependencies": {
     "bluebird": "^3.7.1",
     "chalk": "^3.0.0",
-    "cnpm": "^6.1.0",
     "lodash": "^4.17.15",
     "node-fetch": "^2.6.0",
     "ts-node": "^8.5.0",

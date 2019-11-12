@@ -1,13 +1,46 @@
-import Promise from "bluebird";
+import Bluebird from "bluebird";
 import chalk from "chalk";
-import childProcess from "child_process";
-import { each, padEnd, split, truncate } from "lodash";
 import fetch from "node-fetch";
-import util from "util";
+import querystring from "querystring";
+import { URL } from "url";
 
-const execAsync = util.promisify(childProcess.exec);
+interface IResult {
+  ok: boolean;
+  logId: number;
+  error: string;
+  reason: string;
+}
 
-const LENGTH = 16;
+interface ISyncResult {
+  ok: boolean;
+  status: number;
+  logUrl: string;
+  data: IResult;
+}
+
+const sync = async (name: string): Promise<ISyncResult> => {
+  const url = new URL(`${name}/sync`, "https://r.npm.taobao.org");
+  url.search = querystring.stringify({ nodeps: true, publish: false });
+
+  try {
+    const resp = await fetch(url.toString(), {
+      method: "PUT"
+    });
+    const result: IResult = await resp.json();
+    const logUrl = new URL(
+      `${name}/sync/log/${result.logId}`,
+      "https://r.npm.taobao.org"
+    ).toString();
+    return {
+      data: result,
+      logUrl,
+      ok: result.ok && resp.ok,
+      status: resp.status
+    };
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
 
 const build = async () => {
   const resp = await fetch(
@@ -15,29 +48,25 @@ const build = async () => {
   );
   const data = await resp.json();
 
-  return Promise.map(
+  return Bluebird.map(
     Object.keys(data),
     async name => {
       try {
-        const { stdout, stderr } = await execAsync(`yarn cnpm sync ${name}`);
-        const prefix = padEnd(
-          truncate(name.replace("poi-plugin-", ""), { length: LENGTH }),
-          LENGTH
-        );
-        if (stderr) {
-          each(split(stderr, "\n"), word =>
-            console.error(chalk.bgRed(prefix), word)
+        const result = await sync(name);
+        if (!result.ok || result.data.reason) {
+          console.error(
+            chalk.red(
+              `❌ ${name} [${result.status}] ${result.data.error}: ${result.data.reason} ${result.logUrl}`
+            )
           );
         } else {
-          each(split(stdout, "\n"), word =>
-            console.info(chalk.bgBlue(prefix), word)
-          );
+          console.info(chalk.green(`✨ ${name} [OK] ${result.logUrl}`));
         }
       } catch (e) {
         console.error(e);
       }
     },
-    { concurrency: 3 }
+    { concurrency: 2 }
   );
 };
 
