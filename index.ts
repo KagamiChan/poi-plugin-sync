@@ -1,6 +1,6 @@
-import Bluebird from "bluebird";
 import chalk from "chalk";
 import fetch from "node-fetch";
+import pMap from "p-map";
 import querystring from "querystring";
 import { URL } from "url";
 
@@ -48,7 +48,7 @@ const build = async () => {
   );
   const data = await resp.json();
 
-  return Bluebird.map(
+  return pMap(
     Object.keys(data),
     async name => {
       try {
