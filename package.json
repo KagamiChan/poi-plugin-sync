@@ -37,6 +37,8 @@
     "tslib": "^1.10.0"
   },
   "scripts": {
-    "build": "rollup -c rollup.config.js"
+    "build": "rollup -c rollup.config.js",
+    "lint": "eslint --ext .ts .",
+    "typecheck": "tsc --noEmit"
   }
 }
