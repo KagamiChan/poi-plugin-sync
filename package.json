@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "bluebird": "^3.5.5",
+    "bluebird": "^3.7.1",
     "chalk": "^2.4.1",
     "cnpm": "^6.1.0",
     "lodash": "^4.17.15",
