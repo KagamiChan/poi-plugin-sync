@@ -1,6 +1,8 @@
-name: Code quality
+name: Sync
 
-on: [push]
+on:
+  schedule:
+  - cron: "0 0 */3 * *"
 
 jobs:
   check:
@@ -16,8 +18,11 @@ jobs:
     - name: Yarn install and quality check
       run: |
         yarn install --frozen-lockfile
-        yarn lint
-        yarn typecheck
         yarn build
+      env:
+        CI: true
+    - name: Sync
+      run: |
+        node dist/main.js
       env:
         CI: true
