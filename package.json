@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.29",
-    "@types/lodash": "^4.14.146",
+    "@types/lodash": "^4.14.147",
     "@types/node": "^12.12.7",
     "@types/node-fetch": "^2.5.3",
     "@typescript-eslint/eslint-plugin": "^2.7.0",
