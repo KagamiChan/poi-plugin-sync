@@ -12,6 +12,6 @@ module.exports = {
     'prettier/@typescript-eslint',
   ],
   rules: {
-    'no-console': ['error', { allow: ['info', 'error'] }],
+    'no-console': ['error', { allow: ['info', 'error', 'table'] }],
   },
 }

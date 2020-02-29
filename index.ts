@@ -3,6 +3,7 @@ import fetch from 'node-fetch'
 import pMap from 'p-map'
 import querystring from 'querystring'
 import { URL } from 'url'
+import 'console.table'
 
 interface Result {
   ok: boolean
@@ -42,13 +43,13 @@ const sync = async (name: string): Promise<SyncResult> => {
   }
 }
 
-const build = async (): Promise<void[]> => {
+const build = async (): Promise<void> => {
   const resp = await fetch(
     'https://raw.githubusercontent.com/poooi/poi/master/assets/data/plugin.json',
   )
   const data = await resp.json()
 
-  return pMap(
+  const results = await pMap(
     Object.keys(data),
     async name => {
       try {
@@ -56,18 +57,36 @@ const build = async (): Promise<void[]> => {
         if (!result.ok || result.data.reason) {
           console.error(
             chalk.red(
-              `❌ ${name} [${result.status}] ${result.data.error}: ${result.data.reason} ${result.logUrl}`,
+              `${name}: ${result.data.error}: ${result.data.reason}`,
             ),
           )
-        } else {
-          console.info(chalk.green(`✨ ${name} [OK] ${result.logUrl}`))
+          return {
+            name,
+            status: '❌',
+            url: result.logUrl,
+          }
         }
+
+
+        return {
+          name,
+          status: '✨',
+          url: result.logUrl,
+        }
+
       } catch (e) {
         console.error(e)
+        return {
+          name,
+          status: '❌',
+          url: 'N/A',
+        }
       }
     },
     { concurrency: 2 },
   )
+
+  console.table(results)
 }
 
 const main = async (): Promise<void> => {
