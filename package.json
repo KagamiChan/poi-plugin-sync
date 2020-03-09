@@ -12,7 +12,7 @@
     "console.table": "^0.10.0",
     "lodash": "^4.17.15",
     "node-fetch": "^2.6.0",
-    "p-map": "^3.0.0",
+    "p-map": "^4.0.0",
     "ts-node": "^8.6.2",
     "typescript": "^3.8.3"
   },
