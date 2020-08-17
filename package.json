@@ -10,7 +10,7 @@
   "dependencies": {
     "chalk": "^4.1.0",
     "console.table": "^0.10.0",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.20",
     "node-fetch": "^2.6.0",
     "p-map": "^4.0.0",
     "ts-node": "^8.10.2",
