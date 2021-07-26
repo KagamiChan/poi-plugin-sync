@@ -20,7 +20,7 @@
     "@types/bluebird": "^3.5.36",
     "@types/lodash": "^4.14.171",
     "@types/node": "^16.3.3",
-    "@types/node-fetch": "^2.5.11",
+    "@types/node-fetch": "^2.5.12",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
     "builtin-modules": "^3.2.0",
